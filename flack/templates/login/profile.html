@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %} {% block content %}
+<title>Profile</title>
+
+<div class="container">
+    <div class="col-xs-12">
+
+    </div>
+    <h1>Profile</h1>
+    <p>Username: {{ user }}</p>
+    <p>First name: {{ user.first_name}}</p>
+    <p>Last name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p><a href="http://localhost:8000/edit_profile" align="right">Edit profile</a></li>
+    </p>
+
+</div>
+{% endblock %}

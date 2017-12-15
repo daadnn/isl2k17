@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %} {% block content %}
+
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../static/img/quizfun.png" class="img-responsive img-rounded" alt="Quiz" />
+                <h5>Welcome to Flack! <a href="http://localhost:8000/login/profile">{{ user.username }}</a></h5>
+
+                <p>{{message}}</p>
+
+            </div>
+        </div>
+    </center>
+</div>
+
+{% endblock %}
