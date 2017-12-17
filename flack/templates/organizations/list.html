@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <h1>Organizations</h1>
+    <div class="container">
+        <div class="row">
+            <input type="button" class="btn btn-info" value="Create New Organization" 
+            onclick="location.href = 'http://localhost:8000/organizations/create';">
+        </div>
+    </div>
+
+</div>
+<br><br>
+<div class="row">
+<div class="container">
+Your Organizations
+    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Organization</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for o in organizations %}
+                        <tr>
+                            <td>
+                            {{ o.organization }}
+                            </td>
+                            <td>
+                            <input type="button" class="btn btn-info" value="Invite"
+                            onclick="location.href = 'http://localhost:8000/organizations/invite?id={{ o.id }}';">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        </tbody>
+    </table>
+
+                   
+
+
+</div>
+</div>
+
+{% endblock %}

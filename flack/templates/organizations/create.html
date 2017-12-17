@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <form method="post">
+        {% csrf_token %} 
+        <div class="form-group">
+        <fieldset class="form-group">
+            <legend>New Organization</legend>
+            </div>
+          </fieldset>
+        </div>
+          Organization: <input type="text" class="form-check-input" name="organization" id="organization">
+            <input type="hidden" name="owner" id="owner" value="{{user.id}}">
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        <form>
+        <div id="botonesextra"></div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+</div>
+
+{% endblock %}

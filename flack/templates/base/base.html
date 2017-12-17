@@ -85,8 +85,8 @@
                 {% if user.is_authenticated %}
 
                 <li><a href="http://localhost:8000/profile"><span>
-		                <img class="manImg" src="../../static/img/coin2.png" width="15"></img></span> {{ user.userprofile.coins }} </a></li>
                 <li><a href="http://localhost:8000/login/profile"><span class="glyphicon glyphicon-user"></span>Hi {{ user.username }}!</a></li>
+                <li><a href="http://localhost:8000/organizations/list"><span class="glyphicon glyphicon-user"></span>Organizations</a></li>
                 <li><a href="http://localhost:8000/logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
                 {% else %}
                 <li><a href="http://localhost:8000/in/"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
