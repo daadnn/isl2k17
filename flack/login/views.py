@@ -19,6 +19,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from django.http import JsonResponse
 
+from organizations.models import Organization, OrganizationMember
+
 import re
 
 
@@ -43,14 +45,23 @@ def registration(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            organization_id = request.POST.get('organization', 0)
+            if organization_id != 0:
+                    om = OrganizationMember()
+                    organization = get_object_or_404(Organization, pk=organization_id)
+                    om.organization = organization
+                    om.user = user
+                    om.save()
             login(request, user)
             return home(request)
         else:
             # si esta mal rellenado, se carga de nuevo registro
             return render(request, 'login/register.html', {'form': form})
     else:
+        organization = request.GET.get('organization', 0)
         form = UserForm()
-        args = {'form': form}
+        args = {'form': form,
+                'organization': organization}
         return render(request, 'login/register.html', args)
 
 # Edit User View

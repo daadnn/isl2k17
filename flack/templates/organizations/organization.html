@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %} {% block content %}
+<title>Organization: {{ organization.organization }}</title>
+
+<div class="container">
+    <div class="col-xs-12">
+
+    </div>
+    <h1>Organization: {{ organization.organization }}</h1>
+    
+    {% if is_owner %}
+    <input type="button" class="btn btn-info" value="Invite new member"
+onclick="location.href = 'http://localhost:8000/organizations/invite?organization={{ organization.id }}';">
+
+    <input type="button" class="btn btn-info" value="Create New Channel"
+onclick="location.href = 'http://localhost:8000/channels/create?organization={{ organization.id }}';">
+    {% endif %}
+
+    {% for c in channels %}
+    <div class="form-check">
+    <label class="form-check-label">
+    <input type="button" class="btn btn-info" value="{{c.channel}}"
+onclick="location.href = 'http://localhost:8000/channels/channel?id={{ c.id }}';">
+    </label>
+    </div>
+    {% endfor %}
+    
+</div>
+{% endblock %}

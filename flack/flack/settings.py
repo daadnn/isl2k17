@@ -129,3 +129,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+
+#EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'flackmail'
+EMAIL_HOST_PASSWORD = '123qweasd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+

@@ -27,11 +27,3 @@ class OrganizationMember(models.Model):
 
     def __unicode__(self):
         return self.answer
-
-
-class OrganizationInvitation(models.Model):
-    """
-    Invitation to Organization Model
-    """
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    email = models.CharField(null=False, max_length=100, blank=False)

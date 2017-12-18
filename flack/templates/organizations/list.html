@@ -27,8 +27,8 @@ Your Organizations
                             {{ o.organization }}
                             </td>
                             <td>
-                            <input type="button" class="btn btn-info" value="Invite"
-                            onclick="location.href = 'http://localhost:8000/organizations/invite?id={{ o.id }}';">
+                            <input type="button" class="btn btn-info" value="Enter"
+                            onclick="location.href = 'http://localhost:8000/organizations/organization?id={{ o.id }}';">
                             </td>
                         </tr>
                         {% endfor %}
