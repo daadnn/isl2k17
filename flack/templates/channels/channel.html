@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %} {% block content %}
+<title>Channel: {{ channel.channel }}</title>
+
+<div class="container">
+    <div class="col-xs-12">
+
+    </div>
+    <h1>Channel: {{ channel.channel }}({{ channel.thematic }})</h1>
+    
+    <div class="row">
+        <textarea cols="100" rows="15">Messages placeholder, to be implemented!!</textarea>
+    </div>
+    New Message:<input type="text" class="form-check-input" name="message" id="message">
+    <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+
+    </div>
+    
+</div>
+{% endblock %}

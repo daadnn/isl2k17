@@ -14,6 +14,7 @@ class Channel(models.Model):
     """
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)    
     channel = models.CharField(null=False, max_length=100, blank=False)
+    thematic = models.CharField(null=False, max_length=100, blank=False)
 
     def __unicode__(self):
         return self.channel
@@ -29,5 +30,3 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.message
-
-

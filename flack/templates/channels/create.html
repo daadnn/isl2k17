@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container">
+    <div class="row">
+        <form method="post">
+        {% csrf_token %} 
+        <div class="form-group">
+        <fieldset class="form-group">
+            <legend>New Channel</legend>
+            </div>
+          </fieldset>
+        </div>
+          Channel: <input type="text" class="form-check-input" name="channel" id="channel">
+          Thematic: <input type="text" class="form-check-input" name="thematic" id="thematic">
+            <input type="hidden" name="organization" id="organization" value="{{organization_id}}">
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        <form>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+</div>
+
+{% endblock %}

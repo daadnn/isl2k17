@@ -51,16 +51,17 @@ def create(request):
             om.save()
             return organizationlist(request)
     else:
-        form = OrganizationForm()
-        args = {'form': form,
-                'user': request.user
+        args = {'user': request.user
         }
         return render(request, 'organizations/create.html', args)
 
 
 @login_required
-def organization(request):
-    organization_id = request.GET.get('id', None)
+def organization(request,organization_id='0'):
+    # If organization_id is 0, it isn't a redirection so the organization_id
+    # should be in the get parameter
+    if organization_id == '0':
+        organization_id = request.GET.get('id', None)
     organization = get_object_or_404(Organization, pk=organization_id)
     channels = Channel.objects.filter(organization=organization_id)
     
@@ -77,6 +78,8 @@ def organization(request):
 
 @login_required
 def invite(request):
+    # Set organization_id to 0 so I can check if I need the get 
+    # parameter or if it comes by a post parameter
     organization_id = 0
     if request.method == 'POST':
         email = request.POST.get('email', None)
