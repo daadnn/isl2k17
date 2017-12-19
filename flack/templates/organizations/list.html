@@ -12,9 +12,10 @@
 <br><br>
 <div class="row">
 <div class="container">
-Your Organizations
+Organizations of which you are member
     <table class="table">
                         <thead>
+                        
                             <tr>
                                 <th>Organization</th>
                                 <th>Actions</th>
@@ -40,6 +41,34 @@ Your Organizations
 
 
 </div>
+
+<div class="container">
+Organizations of which you are not member
+    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Organization</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for o in organizations_others %}
+                        <tr>
+                            <td>
+                            {{ o.organization }}
+                            </td>
+                            <td>
+                            <input type="button" class="btn btn-info" value="Join"
+                            onclick="location.href = 'http://localhost:8000/organizations/join?id={{ o.id }}';">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        </tbody>
+    </table>
+
+</div>
+
 </div>
 
 {% endblock %}

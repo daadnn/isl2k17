@@ -29,11 +29,14 @@ from .forms import (
 @login_required
 def organizationlist(request):
     user = request.user
-    organizations = Organization.objects.filter(owner = user)
+    organizations = Organization.objects.filter(organizationmember__user=user)
+    organizations_others = Organization.objects.exclude(id__in=organizations)    
+    
     template = loader.get_template('organizations/list.html')
     context = {
         'user': request.user,
-        'organizations': organizations
+        'organizations': organizations,
+        'organizations_others': organizations_others
     }
     return HttpResponse(template.render(context, request))
 
@@ -44,12 +47,19 @@ def create(request):
         form = OrganizationForm(request.POST)
         if form.is_valid():
             organization = form.save()
+            # create the organization and then join the user that created it
             user = request.user
             om = OrganizationMember()
             om.organization = organization
             om.user = user
             om.save()
             return organizationlist(request)
+        else:
+            args = {
+                'user': request.user,
+                'message': "The new organization name can't be empty!!"    
+            }
+            return render(request, 'organizations/create.html', args)            
     else:
         args = {'user': request.user
         }
@@ -75,6 +85,7 @@ def organization(request,organization_id='0'):
         'is_owner': is_owner
     }
     return HttpResponse(template.render(context, request))
+
 
 @login_required
 def invite(request):
@@ -106,3 +117,17 @@ def invite(request):
     }
     return render(request, 'organizations/invite.html', args)
 
+
+@login_required
+def join(request):
+    organization_id = request.GET.get('id', None)
+
+    if organization_id:
+        organization = get_object_or_404(Organization, pk=organization_id)        
+        user = request.user
+        om = OrganizationMember()
+        om.organization = organization
+        om.user = user
+        om.save()
+
+    return organizationlist(request)

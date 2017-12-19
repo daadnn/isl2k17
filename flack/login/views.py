@@ -31,7 +31,10 @@ from .forms import (
 
 
 def index(request):
-    return render(request, "index.html")
+    if request.user.is_authenticated:
+        return home(request)
+    else:
+        return render(request, "index.html")
 
 
 # Register View
@@ -83,27 +86,20 @@ def edit_profile(request):
 
 @login_required
 def home(request):
-    # si el usuario es admin lo lleva a la pagina de admins
-    user = request.user
-    if user.is_superuser:
-        return HttpResponseRedirect("/admin")
-    # si no, lo lleva a home
-    else:
-        template = loader.get_template('home.html')
-        context = {
-        }
-        return HttpResponse(template.render(context, request))
+    template = loader.get_template('home.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))
 
 
 # Visualizar el profile
 @login_required
 def profile(request, pk=None):
-    storage = messages.get_messages(request)
     if pk:
         user = User.objects.get(pk=pk)
     else:
         user = request.user
-    args = {'user': user, 'message': storage}
+    args = {'user': user}
     return render(request, 'login/profile.html', args)
 
 

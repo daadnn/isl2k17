@@ -8,12 +8,98 @@
     <h1>Channel: {{ channel.channel }}({{ channel.thematic }})</h1>
     
     <div class="row">
-        <textarea cols="100" rows="15">Messages placeholder, to be implemented!!</textarea>
+    
+        <div style="height:300px;overflow: auto;" id="chat" name="chat" contenteditable="true"> </div>
     </div>
     New Message:<input type="text" class="form-check-input" name="message" id="message">
     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
 
     </div>
+    
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+
+        //codigo ajeno copiado y pegado de stack overflow
+        $.ajaxSetup({ 
+             beforeSend: function(xhr, settings) {
+                 function getCookie(name) {
+                     var cookieValue = null;
+                     if (document.cookie && document.cookie != '') {
+                         var cookies = document.cookie.split(';');
+                         for (var i = 0; i < cookies.length; i++) {
+                             var cookie = jQuery.trim(cookies[i]);
+                             // Does this cookie string begin with the name we want?
+                             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                 break;
+                             }
+                         }
+                     }
+                     return cookieValue;
+                 }
+                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                     // Only send the token to relative URLs i.e. locally.
+                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 }
+             } 
+        });
+
+
+
+
+
+    $("#submit").click(function () {
+      var message = $('#message').val();
+
+
+      $.ajax({
+        url: '/channels/new_message/',
+        type: 'POST',
+        data: {
+          'message': message,
+          'channel': {{channel.id}},
+          'user': {{user.id}}
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.success) {
+            $('#message').val('');            
+          }else{
+            alert("Error: Message unsent, try again in a few moments!!");
+          }
+        }
+
+      });
+
+    });
+
+        var last = 0;
+        var algo = setInterval(function() {
+        
+          $.ajax({
+            url: '/channels/fetch/',
+            type: 'POST',
+            data: {
+              'channel': {{channel.id}},
+              'last': last
+            },
+            dataType: 'json',
+            success: function (data) {
+                last = data.last;  
+                var messages = "";
+                for (var i = 0; i < data.messages.length; i++) {
+                    messages += data.messages[i].user + ": " + data.messages[i].value + "<br>";
+                    //alert(messages);
+                }
+                $("#chat").html($("#chat").html() + messages);                
+     
+            }
+
+          });
+    }, 2000);
+
+
+  </script>    
     
 </div>
 {% endblock %}

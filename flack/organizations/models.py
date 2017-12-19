@@ -24,6 +24,3 @@ class OrganizationMember(models.Model):
     """
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return self.answer

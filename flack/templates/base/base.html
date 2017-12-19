@@ -78,6 +78,9 @@
             {% if user.is_authenticated %}
             <ul class="nav navbar-nav">
                 <li><a href="http://localhost:8000/login/home">Home</a></li>
+            {% if user.is_superuser %}
+                <li><a href="http://localhost:8000/admin">Admin</a></li>
+            {% endif %}
             </ul>
             {% endif %}
             <ul class="nav navbar-nav navbar-right">

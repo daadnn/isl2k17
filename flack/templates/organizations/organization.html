@@ -13,16 +13,21 @@ onclick="location.href = 'http://localhost:8000/organizations/invite?organizatio
 
     <input type="button" class="btn btn-info" value="Create New Channel"
 onclick="location.href = 'http://localhost:8000/channels/create?organization={{ organization.id }}';">
+    <br>
     {% endif %}
-
+    <h2>Channels</h2>
+    {% if channels|length > 0 %}
     {% for c in channels %}
     <div class="form-check">
     <label class="form-check-label">
-    <input type="button" class="btn btn-info" value="{{c.channel}}"
+    <input type="button" class="btn btn-info" value="Enter to channel: {{c.channel}}"
 onclick="location.href = 'http://localhost:8000/channels/channel?id={{ c.id }}';">
     </label>
     </div>
     {% endfor %}
+    {% else %}
+        There aren't any channels created in this organization yet.
+    {% endif %}
     
 </div>
 {% endblock %}
