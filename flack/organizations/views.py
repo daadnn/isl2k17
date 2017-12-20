@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from datetime import *
 
@@ -53,7 +53,7 @@ def create(request):
             om.organization = organization
             om.user = user
             om.save()
-            return organizationlist(request)
+            return redirect('/organizations/list')
         else:
             args = {
                 'user': request.user,
@@ -130,4 +130,4 @@ def join(request):
         om.user = user
         om.save()
 
-    return organizationlist(request)
+    return redirect('/organizations/list')

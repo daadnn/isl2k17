@@ -21,12 +21,11 @@ from login import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^in/$', login, {'template_name': 'login/login.html'}, name='login'),
     url(r'^accounts/', include('login.urls')),
     url(r'^organizations/', include('organizations.urls')),    
     url(r'^channels/', include('channels.urls')),    
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('login.urls')),
     url(r'^logout/', logout, {'next_page': '/in'}, name='logout'),    
-    
+    url(r'^in/$', login, {'template_name': 'login/login.html'}, name='login'),    
 ]

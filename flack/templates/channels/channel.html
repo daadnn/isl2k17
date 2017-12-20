@@ -88,7 +88,7 @@
                 last = data.last;  
                 var messages = "";
                 for (var i = 0; i < data.messages.length; i++) {
-                    messages += data.messages[i].user + ": " + data.messages[i].value + "<br>";
+                    messages += "["+data.messages[i].timestamp.substr(0,19)+"] <strong>"+data.messages[i].user + "</strong>: " + data.messages[i].value + "<br>";
                     //alert(messages);
                 }
                 $("#chat").html($("#chat").html() + messages);                

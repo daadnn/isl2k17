@@ -98,13 +98,15 @@ def fetch(request):
     messages = Message.objects.filter(channel=channel_id).filter(pk__gt=last).order_by('id').select_related('user')
     
     messages_list = []
-    last = messages.reverse()[0].id  
-    for m in messages:
-        message = {
-            'user': (str)(m.user),
-            'value': m.message
-        }
-        messages_list.append(message)
+    if len(messages) > 0:
+        last = messages.reverse()[0].id  
+        for m in messages:
+            message = {
+                'user': (str)(m.user),
+                'value': m.message,
+                'timestamp': (str)(m.timestamp)
+            }
+            messages_list.append(message)
 
     data = {
         'messages':messages_list,

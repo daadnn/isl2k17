@@ -27,6 +27,7 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
     message = models.CharField(null=False, max_length=300, blank=False)
-
+    timestamp = models.DateTimeField(auto_now=True)
+    
     def __unicode__(self):
         return self.message

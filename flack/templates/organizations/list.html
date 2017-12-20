@@ -28,8 +28,14 @@ Organizations of which you are member
                             {{ o.organization }}
                             </td>
                             <td>
+                            {% if o.owner == user %}
+                            <input type="button" class="btn btn-info" value="Manage"
+                            onclick="location.href = 'http://localhost:8000/organizations/organization?id={{ o.id }}';">                            
+                            {% else %}
                             <input type="button" class="btn btn-info" value="Enter"
                             onclick="location.href = 'http://localhost:8000/organizations/organization?id={{ o.id }}';">
+                            {% endif %}
+                            
                             </td>
                         </tr>
                         {% endfor %}

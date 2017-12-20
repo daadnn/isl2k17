@@ -32,7 +32,7 @@ from .forms import (
 
 def index(request):
     if request.user.is_authenticated:
-        return home(request)
+        return redirect('/login/home')
     else:
         return render(request, "index.html")
 
@@ -48,15 +48,15 @@ def registration(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            organization_id = request.POST.get('organization', 0)
-            if organization_id != 0:
+            organization_id = request.GET.get('organization', 0)
+            if organization_id > 0:
                     om = OrganizationMember()
                     organization = get_object_or_404(Organization, pk=organization_id)
                     om.organization = organization
                     om.user = user
                     om.save()
             login(request, user)
-            return home(request)
+            return redirect('/login/home')
         else:
             # si esta mal rellenado, se carga de nuevo registro
             return render(request, 'login/register.html', {'form': form})
