@@ -130,4 +130,4 @@ STATICFILES_DIRS = [
 ]
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

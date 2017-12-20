@@ -67,6 +67,7 @@ def registration(request):
                 'organization': organization}
         return render(request, 'login/register.html', args)
 
+
 # Edit User View
 @login_required  # Requiere que este logueado
 def edit_profile(request):
@@ -103,7 +104,6 @@ def profile(request, pk=None):
     return render(request, 'login/profile.html', args)
 
 
-
 # See if the given username exists in the DB.
 def validate_username(request):
     username = request.GET.get('username', None)
@@ -123,6 +123,7 @@ def validate_pass(request):
         'es_valido': match1 != None and match2 != None
     }
     return JsonResponse(data)
+
 
 # See if the given username and pass corresponds with an existing account
 def validate_password(request):

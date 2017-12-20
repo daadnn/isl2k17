@@ -16,11 +16,4 @@ def __str__(self):
 
 # Crea perfil. Para que ande el registro del SuperUser, comentar todo el
 # bloque a partir de aqui
-"""
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
-
-post_save.connect(create_profile, sender=User)
-"""
